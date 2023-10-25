@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách tờ tiền</title>
+  <link th:href="@{/css/total.css}" rel="stylesheet" />
+
+  <style>
+    table, th, td, tr {
+      border: 1px solid black;
+      padding: 10px;
+    }
+    table{
+      width: max-content;
+    }
+    .timkiemsanpham{
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<th:block th:include="/_navigation"></th:block>
+<div class="content">
+
+  <h1>Danh sách tờ tiền</h1>
+  <h2 th:if-="${isUpdate != null}" th:text="${isUpdate}" style="color: green"></h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Mã tờ tiền</th>
+      <th>Mệnh giá</th>
+      <th>Số lượng tồn</th>
+      <th>Thay đổi số lượng tồn</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="money : ${moneyPage.getContent()}">
+      <td th:text="${money.getId()}"></td>
+      <td th:text="${money.getName()}"></td>
+      <td th:text="${money.getQuantity()}"></td>
+      <td >
+        <a class="option" th:href="@{'/api/handle/updateMoney/' +${money.getId()} }"> sửa </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
+</html>

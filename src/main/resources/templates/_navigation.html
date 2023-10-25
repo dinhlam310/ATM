@@ -1,0 +1,30 @@
+<link th:href="@{/css/_navigation.css}" rel="stylesheet" />
+
+<div xmlns:th="http://www.thymeleaf.org">
+
+  <div class="container">
+    <div class="navigation">
+      <ul>
+        <li><a href="/">Trang chủ</a></li>
+        <li id="Money">Lượng tiền
+          <ul>
+<!--            <li><a th:href="@{/api/handle/updateMoney}" id="updateMoney">Thêm tờ tiền</a></li>-->
+            <li><a th:href="@{/api/handle/moneyList/page}" id="MoneyList">Danh sách loại tiền</a></li>
+          </ul>
+        </li>
+        <li id="Customer">Rút tiền
+          <ul>
+            <li><a th:href="@{/api/bill/newBill}" id="newBill" >Rút tiền</a></li>
+          </ul>
+        </li>
+
+        <li id="Product">Báo cáo
+          <ul>
+            <li><a th:href="@{/api/report/newProduct}" id="NewProduct">Biểu đồ</a></li>
+            <li><a th:href="@{/api/bill/billList/page/}" id="ReportList">Từng ngày</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

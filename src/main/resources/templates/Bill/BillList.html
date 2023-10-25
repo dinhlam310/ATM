@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách hóa đơn</title>
+  <link th:href="@{/css/total.css}" rel="stylesheet" />
+
+  <style>
+    table, th, td, tr {
+      border: 1px solid black;
+      padding: 10px;
+    }
+    table{
+      width: max-content;
+    }
+    .timkiemhoadon{
+      border: 1px solid black;
+      padding: 10px;
+      margin-top: 50px;
+    }
+    .success {
+      background-color: green;
+    }
+
+    .failure {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+<th:block th:include="/_navigation"></th:block>
+<div class="content">
+
+  <h1>Danh sách hóa đơn</h1>
+<!--  <h2 th:if-="${isUpdate != null}" th:text="${isUpdate}" style="color: green"></h2>-->
+
+  <table>
+    <thead>
+    <tr>
+      <th>Mã hóa đơn</th>
+      <th>Tình trạng</th>
+      <th>Tổng rút</th>
+      <th>Ngày lập</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bill : ${billPage.getContent()}">
+      <td th:text="${bill.getId()}"></td>
+      <td th:text="${bill.getStatus()}" th:classappend="${bill.getStatus() == 'Thành công'} ? 'success' : 'failure'"></td>
+      <td th:text="${bill.getTotal()}"></td>
+      <td th:text="${bill.getDateBill()}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div style="width: max-content">
+    <a th:if="${billPage.hasPrevious()}" th:href="@{/api/bill/billList/page(page=${billPage.totalPages - billPage.totalPages })}">
+      Trang đầu
+    </a>
+
+    <a th:if="${billPage.hasPrevious()}" th:href="@{/api/bill/billList/page(page=${billPage.number - 1})}">
+      Trước
+    </a>
+    <span th:unless="${billPage.hasPrevious()}">Trước</span>
+
+    <span th:text="${billPage.number + 1}"></span>/<span th:text="${billPage.totalPages}"></span>
+
+    <a th:if="${billPage.hasNext()}" th:href="@{/api/bill/billList/page(page=${billPage.number + 1})}">
+      Tiếp
+    </a>
+    <span th:unless="${billPage.hasNext()}">Tiếp</span>
+
+    <a th:if="${billPage.hasNext()}" th:href="@{/api/bill/billList/page(page=${billPage.totalPages - 1})}">
+      Trang cuối
+    </a>
+  </div>
+
+  <div class="timkiemhoadon">
+    <form class="findBill" th:action="@{'/api/bill/searchBill'}" method="get">
+      <label for="Day"></label>
+      <input type="text"  name="Day" id="Day" placeholder="Nhập ngày lập hóa đơn">
+      <button type="submit" >Tìm kiếm</button>
+    </form>
+  </div>
+
+</div>
+</body>
+</html>

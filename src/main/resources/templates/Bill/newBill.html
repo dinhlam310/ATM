@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Hóa đơn rút tiền mới</title>
+  <link th:href="@{/css/total.css}" rel="stylesheet" />
+</head>
+
+<body>
+
+<th:block th:include="/_navigation"></th:block>
+<div class="content">
+  <h2 th:if="${mess != null}" th:text="${mess}" style="color:red"> </h2>
+  <form id="save-form" th:action="@{'/api/bill/saveBill'}" th:object="${BILL}" method="post">
+
+    <div class="form-new-product">
+      <h2>Hóa đơn mới</h2>
+      <div class="infomation">
+
+        <div class="form-group">
+          <label for="Total">Số tiền cần rút</label>
+          <input th:field="*{total}"  id="Total" type="number" required>
+        </div>
+
+      </div>
+      <div class="submit" id="submit">
+        <button id="bth-save" type="submit" >Rút tiền & tạo hóa đơn mới</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
