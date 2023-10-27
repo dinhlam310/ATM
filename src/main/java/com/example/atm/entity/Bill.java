@@ -4,6 +4,7 @@ package com.example.atm.entity;
 //import jakarta.persistence.Entity;
 //import jakarta.persistence.Id;
 //import jakarta.persistence.Table;
+import com.example.atm.validation.DivisibleByHundred;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,8 +30,12 @@ public class Bill {
     private String status;
 
     @Column(name = "total", nullable = false)
-    @Min(value = 99, message = "Total must be greater than 99")
+//    @Min(value = 100, message = "Total must be greater than 100")
+    @DivisibleByHundred(message = "Total must be divisible by 100")
     private Integer total;
+
+    @Column(name = "message")
+    private String message;
 
     @Column(name = "date_bill", nullable = false)
     private java.sql.Date dateBill;

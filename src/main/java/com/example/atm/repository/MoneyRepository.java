@@ -17,6 +17,9 @@ public interface MoneyRepository extends JpaRepository<Money, Long> {
 
     Optional<Money> findById(Long id);
 
+    Money findByName (String name);
+
+
     Money save(Money money);
 
 }

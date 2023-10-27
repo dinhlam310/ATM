@@ -11,15 +11,15 @@
 <th:block th:include="/_navigation"></th:block>
 <div class="content">
   <h2 th:if="${mess != null}" th:text="${mess}" style="color:red"> </h2>
-  <form id="save-form" th:action="@{'/api/bill/saveBill'}" th:object="${BILL}" method="post">
+  <form id="save-form" th:action="@{'/api/bill/saveBill'}" method="post">
 
     <div class="form-new-product">
       <h2>Hóa đơn mới</h2>
       <div class="infomation">
 
         <div class="form-group">
-          <label for="Total">Số tiền cần rút</label>
-          <input th:field="*{total}"  id="Total" type="number" required>
+          <label for="total">Số tiền cần rút</label>
+          <input name="total" id="total" type="number" required>
         </div>
 
       </div>

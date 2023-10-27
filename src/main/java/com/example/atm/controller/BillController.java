@@ -1,9 +1,7 @@
 package com.example.atm.controller;
 
 import com.example.atm.entity.Bill;
-import com.example.atm.entity.Money;
 import com.example.atm.repository.BillRepository;
-import com.example.atm.repository.MoneyRepository;
 import com.example.atm.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -14,11 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/api/bill")
@@ -51,7 +46,7 @@ public class BillController {
         return "Bill/BillList";
     }
 
-    @GetMapping("/searchBill")
+    @RequestMapping(value = "/searchBill", method = RequestMethod.GET)
     public String findBill(UriComponentsBuilder uriBuilder,
                                @RequestParam("Day") int Day, @RequestParam(defaultValue = "0") int page,
                                Model model, HttpServletRequest request) {
@@ -76,14 +71,32 @@ public class BillController {
 //        return getBills(page, model);
 //    }
 
+//    @RequestMapping(value = "/saveBill", method = RequestMethod.POST)
+//    public String saveBill(@Valid Bill bill, BindingResult bindingResult, @RequestParam(defaultValue = "0") int page, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return saveErrorBill(bill,page,model);
+//        } else {
+//            billService.createNewBill(bill.getTotal());
+//        }
+//        return getBills(page, model);
+//    }
+
+//    @RequestMapping(value = "/saveErrorBill", method = RequestMethod.POST)
+//    public String saveErrorBill(@Valid Bill bill, @RequestParam(defaultValue = "0") int page, Model model) {
+//        billService.createErrorBill(bill.getTotal());
+//        return getBills(page, model);
+//    }
+
     @PostMapping("/saveBill")
     public String saveBill(@Valid Bill bill, BindingResult bindingResult, @RequestParam(defaultValue = "0") int page, Model model) {
+        Bill tempbill = bill;
+        Integer total = tempbill.getTotal();
+////        System.out.println(temp);
         if (bindingResult.hasErrors()) {
             try {
-                billService.createErrorBill(bill.getTotal());
+                billService.createErrorBill(0, total);
             } catch (Exception ex) {
-                // Xử lý lỗi (nếu cần) hoặc không thực hiện hành động nào
-                billService.createErrorBill(bill.getTotal());
+                billService.createErrorBill(0, total);
             }
         } else {
             billService.createNewBill(bill.getTotal());
