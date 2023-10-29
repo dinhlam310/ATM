@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -44,6 +45,24 @@ public class Bill {
     @JoinTable(name = "money_bill", joinColumns = @JoinColumn(name = "bill_id"),
             inverseJoinColumns = @JoinColumn(name = "money_id"))
     private Set<Money> money = new HashSet<>();
+
+    @Transient
+    private UUID uuid;
+
+    public Bill(int i, String thànhCông, int i1, String s, String s1) {
+    }
+
+    public UUID getUuid() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "money_bill",

@@ -1,0 +1,64 @@
+<columnHeader>
+	<band height="66" splitType="Stretch">
+		<staticText>
+			<reportElement x="210" y="20" width="100" height="30" uuid="756407ec-7256-4630-b1ba-aa32fca025d0"/>
+			<textElement>
+				<font size="18"/>
+			</textElement>
+			<text><![CDATA[My Report]]></text>
+		</staticText>
+		<staticText>
+			<reportElement x="-11" y="7" width="128" height="13" uuid="82bb498c-876a-4ba9-b899-5e6c3f75d772"/>
+			<text><![CDATA[Create By: $P{createdBy}]]></text>
+		</staticText>
+		<textField pattern="HH:mm">
+			<reportElement x="477" y="35" width="111" height="15" uuid="23808380-7b31-4364-8dad-e1303c7f267a"/>
+			<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+		</textField>
+		<textField>
+			<reportElement x="410" y="0" width="100" height="17" uuid="cabd1fbf-f105-40a8-8681-d2cf1ecae0be"/>
+			<textElement textAlignment="Right"/>
+			<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+		</textField>
+		<textField evaluationTime="Report">
+			<reportElement x="510" y="0" width="100" height="17" uuid="d439ca51-9d00-4462-a753-aba2662b2302"/>
+			<textElement textAlignment="Left"/>
+			<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+		</textField>
+		<textField pattern="MMMMM dd, yyyy">
+			<reportElement x="477" y="17" width="100" height="15" uuid="5cea2486-97e8-4a7d-91d1-6f356b77ae8e"/>
+			<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+		</textField>
+		<line>
+			<reportElement x="-10" y="64" width="571" height="1" uuid="d7c1381f-998a-438c-8aaf-8cad716aca64"/>
+		</line>
+		<staticText>
+			<reportElement x="0" y="50" width="71" height="15" uuid="13d045d8-3d8b-43bf-a674-d539881a1c8b"/>
+			<text><![CDATA[Id]]></text>
+		</staticText>
+		<staticText>
+			<reportElement x="160" y="50" width="91" height="16" uuid="1ec16b82-0cec-4647-9d54-54781d651a4c"/>
+			<text><![CDATA[Name]]></text>
+		</staticText>
+		<staticText>
+			<reportElement x="340" y="50" width="81" height="15" uuid="c10c71da-fc88-45a6-8870-ae50214f0ce1"/>
+			<text><![CDATA[Gender]]></text>
+		</staticText>
+	</band>
+</columnHeader>
+<detail>
+<band height="20" splitType="Stretch">
+	<textField>
+		<reportElement x="0" y="0" width="71" height="20" uuid="4bfc4382-52de-4dba-aff9-598e1f739982"/>
+		<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+	</textField>
+	<textField>
+		<reportElement x="160" y="0" width="91" height="20" uuid="8c2d153a-7f90-42ce-bea1-f0b6ad7abc22"/>
+		<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+	</textField>
+	<textField>
+		<reportElement x="340" y="0" width="100" height="20" uuid="f8527cdf-508f-4167-8099-68fcc1290f19"/>
+		<textFieldExpression><![CDATA[$F{gender} == 0 ? "Male" : "Female"]]></textFieldExpression>
+	</textField>
+</band>
+</detail>

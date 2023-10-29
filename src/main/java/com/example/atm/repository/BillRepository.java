@@ -21,5 +21,9 @@ public interface BillRepository extends JpaRepository<Bill,Long> {
 
     Optional<Bill> findById(Long id);
 
+    Bill findBillById(Long id);
+
     Bill save(Bill bill);
+
+    Bill findById(Money id);
 }

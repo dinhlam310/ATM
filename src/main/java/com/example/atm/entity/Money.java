@@ -35,6 +35,7 @@ public class Money {
             inverseJoinColumns = @JoinColumn(name = "bill_id", referencedColumnName = "id"))
     private Set<Bill> bills = new HashSet<>();
 
+
     //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "money_bill", joinColumns = @JoinColumn(name = "money_id"),
 //            inverseJoinColumns = @JoinColumn(name = "bill_id"))

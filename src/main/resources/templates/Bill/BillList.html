@@ -38,21 +38,26 @@
   <table>
     <thead>
     <tr>
-      <th>Mã hóa đơn</th>
+      <th>Mã hóa đơn (UUID)</th>
       <th>Tình trạng</th>
       <Th>Thông báo</Th>
       <th>Tổng rút</th>
       <th>Ngày lập</th>
+      <th>Xuất file Excel</th>
 
     </tr>
     </thead>
     <tbody>
     <tr th:each="bill : ${billPage.getContent()}">
-      <td th:text="${bill.getId()}"></td>
+      <td th:text="${bill.getUuid()}"></td>
       <td th:text="${bill.getStatus()}" th:classappend="${bill.getStatus() == 'Thành công'} ? 'success' : 'failure'"></td>
       <td th:text="${bill.getMessage()}"></td>
       <td th:text="${bill.getTotal()}"></td>
       <td th:text="${bill.getDateBill()}"></td>
+      <td >
+<!--        <a class="option" th:href="@{'/api/bill/exportExcel/' +${bill.getId()} }"> Xuất </a>-->
+        <a class="option" th:href="@{'/api/bill/generate/' +${bill.getId()}}"> Xuất </a>
+      </td>
     </tr>
     </tbody>
   </table>
