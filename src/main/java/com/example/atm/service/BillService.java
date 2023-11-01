@@ -115,11 +115,9 @@ public class BillService {
         billDetail.setQuantity(noteCount);
         billDetailRepository.save(billDetail);
 
-//        System.out.println("===============================================================");
-//        System.out.println(money.getQuantity());
-//        System.out.println(quantity);
-//        System.out.println(noteCount);
-//        System.out.println("===============================================================");
     }
 
+    public int TotalQuantityByDateAndMoneyId(Date dateBill , Money moneyId){
+        return billDetailRepository.getTotalQuantityByDateAndMoneyId(dateBill,moneyId);
+    }
 }

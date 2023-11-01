@@ -49,7 +49,6 @@ public class AtmController {
     public String saveMoney(@RequestParam(defaultValue = "0") int page , Model model, Money money) {
 
         if (moneyRepository.findById(money.getId())  != null){
-            //model.addAttribute("isUpdate", "Cập nhật tờ tiền có mã " + money.getId() + " thành công!!");
             moneyRepository.save(money);
         }else{
             return "errorPage";

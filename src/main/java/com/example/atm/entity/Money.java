@@ -2,9 +2,9 @@ package com.example.atm.entity;
 
 //import jakarta.persistence.Entity;
 //import jakarta.persistence.Table;
+
 import lombok.*;
 
-//import jakarta.persistence.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.HashSet;

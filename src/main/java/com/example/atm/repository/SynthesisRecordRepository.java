@@ -5,11 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface SynthesisRecord extends JpaRepository <SynthesisRecordMoney, Long> {
+public interface SynthesisRecordRepository extends JpaRepository <SynthesisRecordMoney, Long> {
 
     @Query("SELECT s FROM SynthesisRecordMoney s ")
-    List<SynthesisRecordMoney> findAll();
+    SynthesisRecordMoney[] findAllRecord();
 }

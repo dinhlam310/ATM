@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,8 @@ public interface BillRepository extends JpaRepository<Bill,Long> {
     Optional<Bill> findById(Long id);
 
     Bill findBillById(Long id);
+
+    Bill[] findBillByDateBill (Date DateBill);
 
     Bill save(Bill bill);
 

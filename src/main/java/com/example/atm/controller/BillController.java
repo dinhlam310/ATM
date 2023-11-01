@@ -2,8 +2,12 @@ package com.example.atm.controller;
 
 import com.example.atm.entity.Bill;
 import com.example.atm.entity.BillDetail;
+import com.example.atm.entity.Money;
+import com.example.atm.entity.SynthesisRecordMoney;
 import com.example.atm.repository.BillDetailRepository;
 import com.example.atm.repository.BillRepository;
+import com.example.atm.repository.MoneyRepository;
+import com.example.atm.repository.SynthesisRecordRepository;
 import com.example.atm.service.BillService;
 import com.example.atm.service.ExcelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +20,19 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/api/bill")
 public class BillController {
     @Autowired
     private BillRepository billRepository;
-
     @Autowired
-    private BillDetailRepository billDetailRepository;
-
+    private MoneyRepository moneyRepository;
+    @Autowired
+    private SynthesisRecordRepository synthesisRecordRepository;
     @Autowired
     private BillService billService;
     @Autowired
@@ -92,6 +97,31 @@ public class BillController {
 //        BillDetail billDetail = billDetailRepository.findByBill(id);
         BillDetail billDetail = null;
         excelService.createExcel(bill,billDetail);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return "JasperReport/htmlExport"+bill.getId();
+    }
+
+    @RequestMapping(value = "/SynthesisReport", method = RequestMethod.GET)
+    public String ViewSynthesisReport() {
+        return "Bill/SynthesisReport";
+    }
+
+    @GetMapping("/synthesis")
+    public String SynthesisReport( Date dateBill) {
+        Bill[] bills = billRepository.findBillByDateBill(dateBill);
+        SynthesisRecordMoney[] synthesisRecordMonies = synthesisRecordRepository.findAllRecord(); // contain 2 attribute : type of money , and quantity each type of money
+
+        for (int moneyType = 1; moneyType <= 4; moneyType++) {//moneyType = 1 because id of Money table start from 1 to 4
+            Money moneyId = moneyRepository.findMoneyById((long) moneyType);// get 4 id for 4 type of money ( 2000,500,200,100)
+
+            //set quantity each money by value of ( date of all bill that we choose on display , and Id of money ) , with 1 dateBill <=> 4 id of money
+            synthesisRecordMonies[moneyType-1].setValue(billService.TotalQuantityByDateAndMoneyId(dateBill, moneyId));
+        }
+        ExcelService.createSynthesisReport(synthesisRecordMonies, bills); // create Jasper Report
         return "Bill/ExportPDF";
     }
 

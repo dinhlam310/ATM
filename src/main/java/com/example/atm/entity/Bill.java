@@ -49,9 +49,6 @@ public class Bill {
     @Transient
     private UUID uuid;
 
-    public Bill(int i, String thànhCông, int i1, String s, String s1) {
-    }
-
     public UUID getUuid() {
         if (uuid == null) {
             uuid = UUID.randomUUID();

@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Báo cáo tổng kết</title>
+  <link th:href="@{/css/total.css}" rel="stylesheet" />
 </head>
 <body>
-$END$
+<th:block th:include="/_navigation"></th:block>
+
+<!--<div class="content">-->
+<!--  <form id="save-form" th:action="@{'/api/bill/synthesis'}" method="get">-->
+<!--    <h1>Vui lòng chọn ngày để xuất file PDF kèm biểu đồ</h1>-->
+
+<!--    <label for="calendar">Calendar:</label>-->
+<!--    <input type="date" id="calendar" name="calendar">-->
+
+<!--    <div class="submit" id="submit">-->
+<!--      <button id="bth-save" type="submit" >Xuất file PDF</button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</div>-->
+<div class="content">
+  <form id="save-form" th:action="@{'/api/bill/synthesis/'}" method="get">
+    <h1>Vui lòng chọn ngày để xuất file PDF kèm biểu đồ</h1>
+
+    <label for="dateBill">Ngày:</label>
+    <input type="date" id="dateBill" name="dateBill" th:value="${#dates.format(dateBill, 'yyyy-MM-dd')}">
+
+    <div class="submit" id="submit">
+      <button id="bth-save" type="submit">Xuất file PDF</button>
+    </div>
+  </form>
+</div>
+
 </body>
 </html>
